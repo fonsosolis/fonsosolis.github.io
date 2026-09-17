@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfonso Solis — Mechatronics Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0E1A32;
+    --navy-2: #142440;
+    --paper: #EDEFF3;
+    --paper-dim: #B9C2D0;
+    --line: rgba(237,239,243,0.16);
+    --line-strong: rgba(237,239,243,0.32);
+    --accent: #E8672C;
+    --ink: #10131A;
+    --ink-soft: #454B57;
+    --card: #FFFFFF;
+    --card-line: #DCE0E8;
+    --max: 1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    color:inherit;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  /* ---------- layout helpers ---------- */
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 28px; }
+  section{ position:relative; }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,26,50,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px;
+  }
+  nav .brand{
+    color:var(--paper); font-weight:600; font-size:14px; letter-spacing:.02em;
+  }
+  nav ul{
+    list-style:none; display:flex; gap:26px; margin:0; padding:0;
+  }
+  nav a{
+    color:var(--paper-dim); text-decoration:none; font-size:13px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  nav a:hover{ color:var(--paper); }
+  @media (max-width:720px){ nav ul{ gap:16px; } nav a{ font-size:11px; } }
+
+  /* ---------- hero (blueprint) ---------- */
+  .hero{
+    background:
+      linear-gradient(var(--navy), var(--navy)),
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 88px),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 88px);
+    color:var(--paper);
+    padding:110px 0 90px;
+    border-bottom:2px solid var(--accent);
+  }
+  .plate{
+    position:relative;
+    border:1px solid var(--line-strong);
+    padding:44px 40px;
+  }
+  .plate::before,.plate::after,
+  .plate .c-br, .plate .c-bl{
+    content:""; position:absolute; width:16px; height:16px;
+    border-color:var(--accent); border-style:solid;
+  }
+  .plate::before{ top:-1px; left:-1px; border-width:2px 0 0 2px; }
+  .plate::after{ top:-1px; right:-1px; border-width:2px 2px 0 0; }
+  .plate .c-bl{ bottom:-1px; left:-1px; border-width:0 0 2px 2px; }
+  .plate .c-br{ bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+
+  .hero-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    color:var(--accent); letter-spacing:.08em; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(34px,6vw,58px); font-weight:600; line-height:1.05;
+    margin-bottom:18px;
+  }
+  .hero p{
+    max-width:560px; color:var(--paper-dim); font-size:17px;
+  }
+  .hero-meta{
+    margin-top:34px; display:flex; gap:34px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--paper-dim);
+  }
+  .hero-meta strong{ display:block; color:var(--paper); font-size:14px; font-weight:500; }
+
+  /* ---------- about band ---------- */
+  .about{ padding:64px 0; border-bottom:1px solid var(--card-line); }
+  .about .wrap{ display:grid; grid-template-columns:180px 1fr; gap:40px; }
+  .about .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--accent);
+    text-transform:none;
+  }
+  .about p{ max-width:640px; color:var(--ink-soft); font-size:16px; }
+.about a.cv-btn{
+    display:inline-block; margin-top:14px; font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--navy); border:1px solid var(--ink); padding:9px 16px;
+    text-decoration:none; transition:background .15s, color .15s;
+  }
+  .about a.cv-btn:hover{ background:var(--navy); color:var(--paper); border-color:var(--navy); }
+  @media (max-width:720px){ .about .wrap{ grid-template-columns:1fr; gap:12px; } }
+
+  /* ---------- section heads ---------- */
+  .section-head{
+    padding:60px 0 8px;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--accent);
+  }
+  .section-head h2{
+    font-size:28px; font-weight:600; margin-top:8px;
+  }
+
+  /* ---------- project card ---------- */
+  .project{
+    display:grid; grid-template-columns:1fr 1fr; gap:44px;
+    padding:44px 0; border-bottom:1px solid var(--card-line);
+    align-items:start;
+  }
+  .project.reverse .shot{ order:2; }
+  .project.reverse .body{ order:1; }
+  .project .body h3{ font-size:23px; font-weight:600; margin-bottom:6px; }
+  .project .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);
+    margin-bottom:14px; display:block;
+  }
+  .project .body p{ color:var(--ink-soft); margin:0 0 16px; font-size:15px; }
+  .project .body p.problem{ color:var(--ink); }
+  .stack{
+    display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 20px;
+  }
+  .stack span{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    border:1px solid var(--card-line); padding:4px 9px;
+    color:var(--ink-soft);
+  }
+  .outcome{
+    border-left:2px solid var(--accent); padding-left:14px; margin-top:18px;
+    font-size:14.5px; color:var(--ink);
+  }
+  .shot{
+    border:1px dashed var(--paper-dim);
+    background:repeating-linear-gradient(135deg, #F3F4F7 0 10px, #EAECF1 10px 20px);
+    min-height:260px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);
+    text-align:center; padding:16px;
+  }
+  @media (max-width:800px){
+    .project, .project.reverse{ grid-template-columns:1fr; }
+    .project.reverse .shot, .project.reverse .body{ order:initial; }
+  }
+
+  /* ---------- AI cards (smaller, side by side) ---------- */
+  .ai-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px; padding:20px 0 50px;
+  }
+  .ai-card{
+    border:1px solid var(--card-line); background:var(--card); padding:28px;
+  }
+  .ai-card .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--accent);
+    display:block; margin-bottom:10px;
+  }
+  .ai-card h3{ font-size:19px; font-weight:600; margin-bottom:10px; }
+  .ai-card p{ font-size:14.5px; color:var(--ink-soft); margin:0 0 12px; }
+  @media (max-width:800px){ .ai-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- SCAR / CAD single block ---------- */
+  .single-block{
+    padding:16px 0 56px;
+  }
+  .single-block .inner{
+    border:1px solid var(--card-line); background:var(--card);
+    padding:36px; display:grid; grid-template-columns:1fr 1fr; gap:36px;
+  }
+  .single-block h3{ font-size:20px; font-weight:600; margin-bottom:10px; }
+  .single-block p{ font-size:14.5px; color:var(--ink-soft); }
+  @media (max-width:800px){ .single-block .inner{ grid-template-columns:1fr; } }
+
+  /* ---------- skills (datasheet) ---------- */
+  .skills{ padding:16px 0 60px; }
+  .datasheet{
+    border:1px solid var(--card-line); border-collapse:collapse; width:100%;
+    font-size:14px;
+  }
+  .datasheet tr{ border-bottom:1px solid var(--card-line); }
+  .datasheet tr:last-child{ border-bottom:none; }
+  .datasheet td{ padding:14px 18px; vertical-align:top; }
+  .datasheet td:first-child{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);
+    width:200px; border-right:1px solid var(--card-line);
+  }
+
+  /* ---------- footer / contact ---------- */
+  footer{
+    background:var(--navy); color:var(--paper);
+    padding:64px 0 40px;
+  }
+  footer h2{ font-size:26px; font-weight:600; margin-bottom:12px; }
+  footer p{ color:var(--paper-dim); max-width:500px; margin-bottom:26px; font-size:15px; }
+  .contact-links{
+    display:flex; gap:26px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px;
+  }
+  .contact-links a{ color:var(--paper); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:2px; }
+  footer .foot-note{
+    margin-top:50px; padding-top:20px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--paper-dim);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">A. SOLIS ROJAS</div>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#ai">AI &amp; Process</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="plate">
+      <span class="c-br"></span><span class="c-bl"></span>
+      <div class="hero-label">MECHATRONICS ENGINEERING PORTFOLIO</div>
+      <h1>Alfonso Solis Rojas</h1>
+      <p>I build practical engineering solutions at the intersection of automation, data, AI, and manufacturing quality — using code and AI as tools inside engineering problems, not as an end in themselves.</p>
+      <div class="hero-meta">
+        <div><strong>Automation</strong>Python, data pipelines, process tools</div>
+        <div><strong>AI</strong>Copilot Studio, AI-assisted workflows</div>
+        <div><strong>Engineering</strong>CAD, mechanical design, systems</div>
+        <div><strong>Quality</strong>Regulated manufacturing environments</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <div class="tag">ABOUT</div>
+    <div>
+      <p>Final-year Mechatronics Engineering student (Universidad Fidélitas, coursework completing December 2026), currently interning in Quality/Manufacturing at a medical device company. The projects below are what I've built there.</p>
+      <a class="cv-btn" href="assets/Alfonso_Solis_CV.pdf" target="_blank">Download CV (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="idx">01 — INDUSTRY PROJECTS</div>
+      <h2>Real problems, solved during my internships</h2>
+    </div>
+
+    <!-- HERO PROJECT -->
+    <div class="project">
+      <div class="body">
+        <span class="kicker">HERO PROJECT · DESKTOP APP</span>
+        <h3>Position &amp; Learning Path Analyzer</h3>
+        <p class="problem">Training kept its position-to-learning-path data in one huge Excel export, laid out in repeating visual blocks instead of clean rows — so answering something as simple as "which positions use this learning path?" meant scrolling and searching by hand through thousands of lines.</p>
+        <p>I built a desktop tool that reads that export once and turns it into an actual queryable dataset, with five ways to work with it: compare positions side by side, search by learning path, search by position, find similar positions when defining a new role, and flag likely data-entry typos.</p>
+        <p>The part I'm most proud of: a position code alone isn't a unique identity — the same code can carry a completely different set of learning paths depending on its cost center. I found this by testing against real data, where one code showed up across 25 cost centers with 21 different learning-path combinations. So every lookup in the tool is built around the pair <code>(position code, cost center)</code>, not the code by itself.</p>
+        <div class="stack">
+          <span>Python</span><span>pandas</span><span>openpyxl</span><span>Tkinter</span>
+          <span>Jaccard similarity</span><span>Fuzzy matching (difflib)</span>
+        </div>
+        <div class="outcome">What used to be a manual search through a giant spreadsheet is now a couple of clicks. It's also read-only on purpose — Training uploads a fresh export each time, which is exactly what they asked for after trying an editable version first.</div>
+      </div>
+      <div>
+        <img src="assets/training-compare.png" alt="Compare positions result, showing shared vs. unique learning paths">
+        <img src="assets/training-similar.png" alt="Similar positions ranked by shared learning paths" style="margin-top:14px;">
+      </div>
+    </div>
+
+    <!-- COMPLAINTS -->
+    <div class="project reverse">
+      <div>
+        <img src="assets/complaints-app.png" alt="Complaints Analyzer app after running an analysis">
+        <img src="assets/complaints-output.png" alt="Analyzed complaints output, color-coded by category" style="margin-top:14px;">
+      </div>
+      <div class="body">
+        <span class="kicker">DESKTOP APP · RULE-BASED NLP</span>
+        <h3>Complaint Classification &amp; Investigation Analysis</h3>
+        <p class="problem">Closed complaint tickets came with a free-text investigation summary that someone had to read and manually tag with a confirmation status, failure mode, and probable cause — one at a time, month after month.</p>
+        <p>I built a rule-based tool that reads each summary and classifies it with keyword matching, then writes a clean, color-coded Excel report. What used to be a slow, one-by-one manual read-through now runs in the time it takes to open the file.</p>
+        <div class="stack">
+          <span>Python</span><span>pandas</span><span>Rule-based NLP</span><span>openpyxl styling</span>
+        </div>
+        <div class="outcome">It doesn't force an answer when a summary is vague or contradicts itself — those go to a separate "Needs Review" sheet instead of getting guessed at. A wrong automatic classification is worse than an honest "not sure."</div>
+      </div>
+    </div>
+
+    <!-- SAMPLING -->
+    <div class="project">
+      <div class="body">
+        <span class="kicker">DESKTOP APP · DECISION SUPPORT</span>
+        <h3>Sampling Plan Analyzer</h3>
+        <p class="problem">Deciding whether an item's inspection sampling level should tighten, relax, or stay the same meant manually cross-checking defect rates, defect classes, and rejected-lot history for every item, every period.</p>
+        <p>This tool ingests the raw data, calculates DPM and the rest per item, and applies a defined set of rules to recommend Tighten / Reduce / Maintain — then writes out, in plain language, exactly why each flagged item got that call. A review that used to take a while going item by item in Excel is now generated in one pass.</p>
+        <div class="stack">
+          <span>Python</span><span>pandas</span><span>DPM calculation</span><span>Rule-based logic</span><span>openpyxl</span>
+        </div>
+        <div class="outcome">Built as decision support, not a certified compliance system — the logic reflects a specific set of business rules, not a full implementation of an inspection standard.</div>
+      </div>
+      <div>
+        <img src="assets/sampling-app.png" alt="Sampling Plan Analyzer app after running an analysis">
+        <img src="assets/sampling-output.png" alt="Recommendations table, color-coded Tighten/Reduce/Maintain" style="margin-top:14px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ai" style="background:#F6F7FA; border-top:1px solid var(--card-line); border-bottom:1px solid var(--card-line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="idx">02 — AI &amp; PROCESS IMPROVEMENT</div>
+      <h2>Applying AI to real quality processes</h2>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card">
+        <span class="kicker">MICROSOFT COPILOT STUDIO</span>
+        <h3>Quality Management Review Assistant</h3>
+        <p>An AI agent that helps QMR owners draft and improve their quarterly conclusion comments per metric — checking each comment against defined targets (training completion, PM compliance, DPM, complaint rate) and returning a status, target gap, and a proposed comment, rather than a generic write-up.</p>
+        <p>Reframed after stakeholder feedback to assess audit readiness the way an inspector would, not just whether a metric trended up or down.</p>
+      </div>
+      <div class="ai-card">
+        <span class="kicker">MICROSOFT COPILOT STUDIO</span>
+        <h3>CAPA Investigation Reviewer</h3>
+        <p>An agent that reviews CAPA investigation packages against ISO 13485, FDA 21 CFR 820, and MDSAP — returning a structured assessment (strengths, gaps, root-cause verdict, audit-readiness rating, top recommendations) instead of a summary.</p>
+        <p>Shaped its instructions and knowledge base; iterated it from a fixed section template into a generalized reviewer that reads whatever sections are present in a given investigation, working only from the evidence actually submitted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="single-block">
+  <div class="wrap">
+    <div class="section-head" style="padding-top:56px;">
+      <div class="idx">03 — TRAINING CONTENT</div>
+      <h2>SCAR Investigation Training System</h2>
+    </div>
+    <div class="inner" style="grid-template-columns:1fr;">
+      <div>
+        <p>Suppliers fill out an 11-page Supplier Corrective Action Request form, section by section. I put together a series of short instructional videos that walk through it — screen-recorded over the real form, with AI-generated voiceover, auto-captions, synced zoom into each field, and callouts for common mistakes.</p>
+        <div class="stack">
+          <span>Instructional design</span><span>AI voice generation</span><span>Screen-recording / motion graphics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="design" style="background:#F6F7FA; border-top:1px solid var(--card-line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="idx">04 — ENGINEERING DESIGN</div>
+      <h2>Mechanical, systems, and electronics work</h2>
+    </div>
+    <div class="ai-grid" style="padding-bottom:56px;">
+      <div class="ai-card" style="grid-column:1 / -1;">
+        <span class="kicker">AUTODESK INVENTOR · MECHANICAL DESIGN</span>
+        <h3>Rueda Loca — Industrial Caster Wheel Assembly</h3>
+        <p>Final CAD project: modeled a 13-part industrial caster wheel assembly in Autodesk Inventor directly from a technical drawing set — shaft with dual ISO metric threads, stepped mounting bracket, spool-shaped end cap, wheel, and standard hardware from Content Center — then built the full assembly, exploded view, and 2D drawing set with BOM.</p>
+        <div class="stack">
+          <span>Autodesk Inventor</span><span>Parametric modeling</span><span>GD&amp;T reading</span><span>Assembly &amp; exploded views</span>
+        </div>
+        <img src="assets/rueda-loca-exploded.png" alt="Rueda Loca exploded assembly view" style="margin-top:16px; border:1px solid var(--card-line);">
+      </div>
+      <div class="ai-card" style="grid-column:1 / -1;">
+        <span class="kicker">AUTODESK REVIT · BIM / SYSTEMS</span>
+        <h3>Residential Building Design</h3>
+        <p>Modeled a residential building in Revit, including levels, walls, openings, and interior layout.</p>
+        <img src="assets/revit-building.png" alt="Revit residential building model" style="margin-top:16px; border:1px solid var(--card-line);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:#F6F7FA; border-top:1px solid var(--card-line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="idx">05 — SKILLS</div>
+      <h2>Technical summary</h2>
+    </div>
+    <div class="skills">
+      <table class="datasheet">
+        <tr><td>PROGRAMMING</td><td>Python (pandas, openpyxl, Tkinter), rule-based NLP, MATLAB</td></tr>
+        <tr><td>DATA &amp; BI</td><td>Power BI, Excel, Oracle data extraction</td></tr>
+        <tr><td>AI TOOLING</td><td>Microsoft Copilot Studio — agent design, prompt engineering, knowledge base curation</td></tr>
+        <tr><td>CAD</td><td>Autodesk Inventor, Revit, AutoCAD, Multisim, Tinkercad, Proteus</td></tr>
+        <tr><td>QUALITY SYSTEMS</td><td>ISO 13485, FDA 21 CFR 820, MDSAP, ISO 9001, SIPOCs, FMEAs, root cause analysis</td></tr>
+        <tr><td>CERTIFICATIONS</td><td>Certified ScrumMaster, Lean Six Sigma Yellow Belt</td></tr>
+        <tr><td>LANGUAGES</td><td>Spanish (native), English (C1), German (B2), French (B1)</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-links">
+      <a href="mailto:alfonsoellis.solis9@gmail.com">alfonsoellis.solis9@gmail.com</a>
+      <a href="tel:+50684972400">+506 8497-2400</a>
+      <a href="#">GitHub — add link</a>
+      <a href="#">LinkedIn — add link</a>
+    </div>
+    <div class="foot-note">SAN JOSÉ, COSTA RICA — BUILT WITH GITHUB PAGES</div>
+  </div>
+</footer>
+
+</body>
+</html>
